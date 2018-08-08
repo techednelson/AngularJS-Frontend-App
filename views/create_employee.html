@@ -163,7 +163,7 @@
         <div class="col-md-6">
             <select class="form-control" 
                 ng-model="countrySrc"
-                ng-options="country for (country,city) in countries"
+                ng-options="country for (country, city) in countries"
                 ng-change="getSelectedCountry()">
                 <option value="">Select a Country</option>
             </select>
@@ -185,7 +185,8 @@
             <select class="form-control" 
                 ng-disabled="!countrySrc"
                 ng-model="city" 
-                ng-options="city for city in countrySrc">
+                ng-options="city for city in countrySrc"
+                ng-change="getSelectedCity()">
                 <option value="">Select a City</option>
             </select>
         </div>
@@ -272,9 +273,10 @@
         </div>
         <div class="col-md-6">
             <select class="form-control" 
-                ng-model="department" 
-                ng-options="department for department in areas">
-                <option value="">Select a department</option>
+                ng-model="departmentSrc" 
+                ng-options="department.name for department in departments"
+                ng-change="getSelectedDepartment()">
+                <option value="">Select a Department</option>
             </select>
         </div>
        <div class="col-md-4">

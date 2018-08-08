@@ -14,5 +14,3 @@ services.factory('employeeFactory', function ($resource) {
         delete: { method: 'DELETE', params: {id: '@id'} }
     })
 });
-
-

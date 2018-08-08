@@ -14,25 +14,38 @@ angular.module('departmentCtrl', [])
 
   .controller('createDepartment', ['$scope','departmentsFactory', 'locationFactory', '$location', function($scope, departmentsFactory, locationFactory, $location) {
 
-    // $scope.department = { 
-    //   name : '',
-    //   address: {
-    //     city : '',
-    //     country : '',
-    //     street : '',
-    //     streetNumber : '',
-    //     zipCode: '' 
-    //   }
-    // };
+    $scope.department = { 
+      name : '',
+      address: {
+        city : '',
+        country : '',
+        street : '',
+        streetNumber : '',
+        zipCode: '' 
+      }
+    };
 
     //Select options for country and city
     $scope.countries = locationFactory;
 
+    $scope.getSelectedCountry = function() {
+      for(var propName in $scope.countries) {
+        if($scope.countries[propName] === $scope.countrySrc) {
+          $scope.department.address.country = propName;
+        }
+      }
+    };
+
+    $scope.getSelectedCity = function() { 
+      $scope.department.address.city = $scope.city;
+    };
+
     // callback for ng-submit 'registerDepartment'
     $scope.registerDepartment = function() {
+      console.log($scope.department);
       departmentsFactory.create($scope.department);
-      $location.path('/show_departments');
       $scope.departments = departmentsFactory.query();
+      $location.path('/show_departments');
     };
     
   }])
@@ -52,10 +65,14 @@ angular.module('departmentCtrl', [])
     $scope.countries = locationFactory;
 
     $scope.getSelectedCountry = function() {
-      $scope.department.address.country = $scope.countrySrc;
+      for(var propName in $scope.countries) {
+        if($scope.countries[propName] === $scope.countrySrc) {
+          $scope.department.address.country = propName;
+        }
+      }
     };
     $scope.getSelectedCity = function() { 
-      $scope.department.address.city = $scope.citySrc;
+      $scope.department.address.city = $scope.city;
     };
 
     // callback for ng-submit 'updateDepartment':
@@ -71,6 +88,7 @@ angular.module('departmentCtrl', [])
 
     // callback for ng-click 'deleteDepartment':
     $scope.deleteDepartment = function (departmentId) {
+      console.log(departmentId);
       departmentFactory.delete({ id: departmentId });
       $scope.departments = departmentsFactory.query();
   };

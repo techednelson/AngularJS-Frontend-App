@@ -7,7 +7,6 @@ services.factory('locationFactory', function () {
       mexico : ['mexico', 'guadalajara', 'monterrey'],
       spain: ['madrid', 'barcelona', 'sevilla'],
       USA : ['new york', 'los angeles', 'san francisco']
-    
-    };
+  };
 });
 

@@ -1,0 +1,39 @@
+<h1 class="text-center list-title">HR Departments Database</h1>
+
+<div class="row">
+    <!--select option-->
+    <div class="col-sm-4">
+      <select class="form-control" ng-model="departmentOrder">
+        <option value="name">Department</option>
+        <option value="address.country">Country</option>
+      </select>
+    </div>
+     <!--Order-->
+    <div class="col-sm-2">
+      <label class="form-check-label"><input class="form-check-input" type="radio" name="direction" checked ng-model="direction"> asc</label>
+      <label class="form-check-label">
+        <input class="form-check-input" type="radio" name="direction" value="reverse" ng-model="direction"> desc</label>
+    </div>
+    <!--Search Query-->
+    <div class="col-sm-6">
+      <input type="text" id="searchQuery" class="form-control" placeholder="Search for departments"
+      autofocus ng-model="query">
+    </div>
+  </div>
+  
+
+<table class="table table-striped">
+    <thead>
+        <th>Department id</th><th>Name</th><th>Country</th><th>More</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in departments | filter: query | orderBy: departmentOrder: direction">
+
+        <td>{{ item.id }}</td>
+        <td>{{ item.name | uppercase }}</td>
+        <td>{{ item.address.country | uppercase }}</td>
+         <td>
+            <a class="btn btn-default" ng-click="editDepartment(item.id)" role="button"><i class="fas fa-info-circle"></i></a>
+        </td>
+    </tbody>
+</table>

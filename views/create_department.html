@@ -1,0 +1,141 @@
+<form novalidate name="departmentForm" class="form-horizontal" ng-submit="registerDepartment()">
+  <h2>Create Department</h2>
+
+   <!-- Department name -->
+    <div class="row form-group">
+        <div class="col-md-2">
+            <label for="inputDepartmentName">Department Name</label>
+        </div>
+        <div class="col-md-6">
+            <input class="form-control" 
+                    type="text" 
+                    name="inputDepartmentName" 
+                    placeholder="Department Name"
+                    ng-model="department.name"
+                    ng-required="true"
+                    ng-minlength="3"
+                    ng-maxlength="15">
+        </div>
+        <div class="col-md-4">
+             <p class="validationError"  
+                ng-show="departmentForm.inputDepartmentName.$invalid && !departmentForm.inputDepartmentName.$pristine">
+                You must enter a department name between 3 and 15 characters.
+             </p>
+        </div>
+    </div>
+ 
+     <!-- Country -->
+     <div class="row form-group">
+        <div class="col-md-2">
+            <label for="inputCountry">Country</label>
+        </div>
+        <div class="col-md-6">
+            <select class="form-control" 
+                ng-model="countrySrc"
+                ng-options="country for (country,city) in countries"
+                ng-change="getSelectedCountry()">
+                <option value="">Select a Country</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <p class="validationError"  
+                ng-show="departmentForm.inputCountry.$invalid && !departmentForm.inputCountry.$pristine">
+                You must select a country.
+            </p>
+        </div>
+    </div>
+
+    <!-- City -->
+    <div class="row form-group">
+        <div class="col-md-2">
+            <label for="inputCity">City</label>
+        </div>
+        <div class="col-md-6">
+            <select class="form-control" 
+                ng-disabled="!countrySrc"
+                ng-model="city" 
+                ng-options="city for city in countrySrc">
+                <option value="">Select a City</option>
+            </select>
+        </div>
+       <div class="col-md-4">
+            <p class="validationError"  
+                ng-show="departmentForm.inputCity.$invalid && !departmentForm.inputCity.$pristine">
+                You must select a city.
+            </p>
+       </div>
+    </div>
+    
+     <!-- Street -->
+     <div class="row form-group">
+        <div class="col-md-2">
+             <label for="inputStreet">Street</label>
+        </div>
+        <div class="col-md-6">
+            <input class="form-control" 
+                     type="text" 
+                    name="inputStreet" 
+                    placeholder="Street" 
+                    ng-model="department.address.street"
+                    ng-required="true"
+                    ng-minlength="5"
+                    ng-maxlength="35">
+       </div>
+       <div class="col-md-4">
+            <p class="validationError"  
+                ng-show="departmentForm.inputStreet.$invalid && !departmentForm.inputStreet.$pristine">
+                You must enter a street between 5 and 35 characters.
+            </p>
+       </div>
+    </div>
+
+     <!-- Street Number -->
+    <div class="row form-group">
+        <div class="col-md-2">
+            <label for="inputStreetNumber">Street #</label>
+        </div>
+        <div class="col-md-6">
+            <input class="form-control" 
+                    type="number" 
+                    name="inputStreetNumber" 
+                    placeholder="Street Number" 
+                    ng-model="department.address.streetNumber"
+                    ng-required="true"
+                    ng-maxlength="3">
+        </div>
+        <div class="col-md-4">
+             <p class="validationError"  
+                ng-show="departmentForm.inputStreetNumber.$invalid && !departmentForm.inputStreetNumber.$pristine">
+                You must enter a 3 digit street number.
+            </p>
+        </div>
+    </div> 
+    
+    <!-- Zip Code -->
+    <div class="row form-group">
+        <div class="col-md-2">
+            <label for="inputZipCode">Zip Code</label>
+        </div>
+        <div class="col-md-6">
+            <input class="form-control" 
+                    type="number"
+                    name="inputZipCode" 
+                    placeholder="Zip Code" 
+                    ng-model="department.address.zipCode"
+                    ng-required="true"
+                    ng-minlength="6"
+                    ng-maxlength="6">
+        </div>
+        <div class="col-md-4">
+            <p class="validationError"  
+                ng-show="departmentForm.inputZipCode.$invalid && !departmentForm.inputZipCode.$pristine">
+                You must enter a 6 digits zip code number.
+            </p>
+        </div>
+    </div>   
+    
+    <button type="submit" class="btn btn-default submit">Create</button>
+
+    <a class="btn btn-default" href="#show_departments" role="button"><i class="fas fa-undo"></i></a>
+
+</form>

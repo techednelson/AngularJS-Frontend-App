@@ -1,0 +1,41 @@
+<h1 class="text-center list-title">HR Employees Database</h1>
+
+<div class="row">
+  <!--select option-->
+  <div class="col-sm-4">
+    <select class="form-control" ng-model="employeeOrder">
+      <option value="firstName">First Name</option>
+      <option value="lastName">Last Name</option>
+    </select>
+  </div>
+   <!--Order-->
+  <div class="col-sm-2">
+    <label class="form-check-label"><input class="form-check-input" type="radio" name="direction" checked ng-model="direction"> asc</label>
+    <label class="form-check-label">
+      <input class="form-check-input" type="radio" name="direction" value="reverse" ng-model="direction"> desc</label>
+  </div>
+  <!--Search Query-->
+  <div class="col-sm-6">
+    <input type="text" id="searchQuery" class="form-control" placeholder="Search for employees"
+    autofocus ng-model="query">
+  </div>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+          <th>Employee id</th><th>First Name</th><th>Last name</th><th>More</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in employees | filter: query | orderBy: employeeOrder: direction">
+
+        <td>{{ item.id }}</td>
+        <td>{{ item.firstName | uppercase }}</td>
+        <td>{{ item.lastName | uppercase }}</td>
+        <td>
+          <a class="btn btn-default" ng-click="editEmployee(item.id)" role="button"><i class="fas fa-info-circle"></i></a>
+        </td>
+      </tr> 
+    </tbody>
+</table>

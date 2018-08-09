@@ -1,6 +1,6 @@
 angular.module('employeeCtrl', [])
 
-  .controller('employees', ['$scope','employeesFactory', '$location' , function($scope, employeesFactory, $location) {
+  .controller('employees', ['$scope','employeesFactory', '$location', function($scope, employeesFactory, $location) {
 
     //Get method to render Employees List in show_employees
     $scope.employees = employeesFactory.query();
@@ -12,7 +12,7 @@ angular.module('employeeCtrl', [])
 
   }])
 
-  .controller('createEmployee', ['$scope', 'employeesFactory', 'locationFactory', '$location', 'departmentsFactory' , function($scope, employeesFactory, locationFactory, $location, departmentsFactory) {
+  .controller('createEmployee', ['$scope', 'employeesFactory', 'locationFactory', 'departmentsFactory', '$location', '$window', function($scope, employeesFactory, locationFactory, departmentsFactory, $location, $window,) {
 
     $scope.employee = { 
       firstName : '',
@@ -33,6 +33,8 @@ angular.module('employeeCtrl', [])
       },
       joinDate : ''
     };
+
+    $scope.clear = angular.copy($scope.employee);
 
     //Select options for country and city
     $scope.countries = locationFactory;
@@ -62,9 +64,7 @@ angular.module('employeeCtrl', [])
       departmentsFactory.query().$promise.then(function(response) {
         for(var item of response) {
           if(item.name === $scope.departmentSrc.name) {
-            console.log(item.id);
             $scope.employee.department.id = item.id;
-            console.log($scope.employee.department.id);
           }
         }
       });
@@ -72,14 +72,19 @@ angular.module('employeeCtrl', [])
     
     // callback for ng-submit 'registerEmployee'
     $scope.registerEmployee = function() {
-      employeesFactory.create($scope.employee);
-      $scope.employees = employeesFactory.query();
-      $location.path('/show_employees');
+      employeesFactory.create($scope.employee).$promise.then(function() {
+        $window.alert('Employee was successfully registered');
+        $window.location.reload();
+        $location.path('/show_employees/');
+      }).catch(function(error) {
+        console.log(error);
+        $window.alert('There was a problem registering the new employee');
+      });
     };
 
   }])
 
-  .controller('updateEmployee', ['$scope', 'employeeFactory', 'employeesFactory', 'locationFactory', '$location', '$routeParams', '$window', function($scope, employeeFactory, employeesFactory, locationFactory, $location, $routeParams, $window) {
+  .controller('updateEmployee', ['$scope', 'employeeFactory', 'employeesFactory', 'locationFactory', '$location', '$routeParams', '$window', function($scope, employeeFactory, employeesFactory, locationFactory, $location, $routeParams, $window) { 
 
     // get by id method to bring employee with id preselect as parameter from web service
     $scope.employee = employeeFactory.show({id: $routeParams.id});
@@ -124,8 +129,14 @@ angular.module('employeeCtrl', [])
     
     // callback for ng-submit 'updateEmployee':
     $scope.updateEmployee = function () {
-      employeesFactory.update($scope.employee);
-      $location.path('/show_employees');
+      employeesFactory.update($scope.employee).$promise.then(function() {
+        $window.alert('Employee was successfully updated');
+        $window.location.reload();
+        $location.path('/show_employees/');
+      }).catch(function(error) {
+        console.log(error);
+        $window.alert('There was a problem updating the employee');
+      });
     };
 
     // callback for ng-click 'cancel':
@@ -135,10 +146,14 @@ angular.module('employeeCtrl', [])
 
     // callback for ng-click 'deleteEmployee':
     $scope.deleteEmployee = function (employeeId) {
-      console.log(employeeId);
-      employeeFactory.delete({ id: employeeId });
-      $scope.employees = employeesFactory.query();
-      $window.alert('Employee was successfully deleted')
-  };
+      employeeFactory.delete({ id: employeeId }).$promise.then(function() {
+        $window.alert('Employee was successfully registered');
+        $window.location.reload();
+        $location.path('/show_employees/');
+      }).catch(function(error) {
+        console.log(error);
+        $window.alert('There was a problem deleting the employee');
+      });
+    };
 
-}]);
+  }]);

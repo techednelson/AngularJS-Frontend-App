@@ -12,7 +12,7 @@ angular.module('departmentCtrl', [])
 
   }])
 
-  .controller('createDepartment', ['$scope','departmentsFactory', 'locationFactory', '$location', function($scope, departmentsFactory, locationFactory, $location) {
+  .controller('createDepartment', ['$scope','departmentsFactory', 'locationFactory', '$location', '$window', function($scope, departmentsFactory, locationFactory, $location, $window) {
 
     $scope.department = { 
       name : '',
@@ -42,15 +42,19 @@ angular.module('departmentCtrl', [])
 
     // callback for ng-submit 'registerDepartment'
     $scope.registerDepartment = function() {
-      console.log($scope.department);
-      departmentsFactory.create($scope.department);
-      $scope.departments = departmentsFactory.query();
-      $location.path('/show_departments');
+      departmentsFactory.create($scope.department).$promise.then(function() {
+        $window.alert('Department was successfully registered');
+        $window.location.reload();
+        $location.path('/show_departments/');
+      }).catch(function(error) {
+        console.log(error);
+        $window.alert('There was a problem registering the new department');
+      });
     };
     
   }])
 
-  .controller('updateDepartment', ['$scope', 'departmentFactory', 'departmentsFactory', 'locationFactory', '$location', '$routeParams', function($scope, departmentFactory, departmentsFactory, locationFactory, $location, $routeParams) {
+  .controller('updateDepartment', ['$scope', 'departmentFactory', 'departmentsFactory', 'locationFactory', '$location', '$routeParams', '$window', function($scope, departmentFactory, departmentsFactory, locationFactory, $location, $routeParams, $window) {
 
     // get by id method to bring department with id preselect as parameter from web service
     $scope.department = departmentFactory.show({id: $routeParams.id});
@@ -77,8 +81,14 @@ angular.module('departmentCtrl', [])
 
     // callback for ng-submit 'updateDepartment':
     $scope.updateDepartment = function () {
-      departmentsFactory.update($scope.department);
-      $location.path('/show_departments');
+      departmentsFactory.update($scope.department).$promise.then(function() {
+        $window.alert('Department was successfully updated');
+        $window.location.reload();
+        $location.path('/show_departments/');
+      }).catch(function(error) {
+        console.log(error);
+        $window.alert('There was a problem updating the department');
+      });
     };
 
     // callback for ng-click 'cancel':
@@ -88,10 +98,15 @@ angular.module('departmentCtrl', [])
 
     // callback for ng-click 'deleteDepartment':
     $scope.deleteDepartment = function (departmentId) {
-      console.log(departmentId);
-      departmentFactory.delete({ id: departmentId });
-      $scope.departments = departmentsFactory.query();
-  };
+      departmentFactory.delete({ id: departmentId }).$promise.then(function() {
+        $window.alert('Department was successfully deleted');
+        $window.location.reload();
+        $location.path('/show_departments/');
+      }).catch(function(error) {
+        console.log(error);
+        $window.alert('There was a problem deleting department');
+      });
+    };
 
-}]);
+  }]);
 

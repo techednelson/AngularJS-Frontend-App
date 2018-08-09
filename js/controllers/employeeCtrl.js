@@ -52,7 +52,7 @@ angular.module('employeeCtrl', [])
     };
 
     //Select options for departments
-    $scope.departments = [
+    $Scope.departments = [
       {name: 'hr'}, 
       {name: 'it'}, 
       {name: 'sales'}, 

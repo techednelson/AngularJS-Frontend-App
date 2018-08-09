@@ -6,13 +6,17 @@ i {
   color: #EC971F;
 }
 
+.navbar-brand {
+  position: relative;
+  bottom: 8px;
+}
+
 .jumbotron {
-  margin-top: 2rem;
-  color: #404040;
+  margin-top: 1.5rem;
   background-color: #FFFFFF;
 }
 
-span {
+.jumbotron h1, span {
   color: #EC971F;
 }
 

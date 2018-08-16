@@ -1,4 +1,4 @@
-var services = angular.module('addressService', []);
+var services = angular.module('commonService', []);
 
 services.factory('locationFactory', function () {
   return {

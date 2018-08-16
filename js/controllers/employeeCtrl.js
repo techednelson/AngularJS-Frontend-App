@@ -107,9 +107,11 @@ angular.module('employeeCtrl', [])
 
     $scope.getSelectedDepartment = function() {
       $scope.employee.department.id = departmentsFactory.query().$promise.then(function(response) {
-        return response.map(function(item) {
-          if(item.name === $scope.departmentSrc.name) return item.id;
-        })
+        for(var item of response) {
+          if(item.name === $scope.departmentSrc.name) {
+            $scope.employee.department.id = item.id;
+          }
+        }
       });
     };
     

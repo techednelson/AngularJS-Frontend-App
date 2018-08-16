@@ -43,7 +43,7 @@ angular.module('departmentCtrl', [])
     // callback for ng-submit 'registerDepartment'
     $scope.registerDepartment = function() {
       departmentsFactory.create($scope.department).$promise.then(function() {
-        $window.alert('Department was successfully registered');
+        $window.alert('Department was successfully created');
         $window.location.reload();
         $location.path('/show_departments/');
       }).catch(function(error) {

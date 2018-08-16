@@ -34,8 +34,6 @@ angular.module('employeeCtrl', [])
       joinDate : ''
     };
 
-    $scope.clear = angular.copy($scope.employee);
-
     //Select options for country and city
     $scope.countries = locationFactory;
 
@@ -52,13 +50,7 @@ angular.module('employeeCtrl', [])
     };
 
     //Select options for departments
-    $Scope.departments = [
-      {name: 'hr'}, 
-      {name: 'it'}, 
-      {name: 'sales'}, 
-      {name: 'marketing'}, 
-      {name: 'development'}
-    ];
+    $scope.departments = departmentsFactory.query();
 
     $scope.getSelectedDepartment = function() {
       departmentsFactory.query().$promise.then(function(response) {
@@ -84,7 +76,7 @@ angular.module('employeeCtrl', [])
 
   }])
 
-  .controller('updateEmployee', ['$scope', 'employeeFactory', 'employeesFactory', 'locationFactory', '$location', '$routeParams', '$window', function($scope, employeeFactory, employeesFactory, locationFactory, $location, $routeParams, $window) { 
+  .controller('updateEmployee', ['$scope', 'employeeFactory', 'employeesFactory', 'departmentsFactory',  'locationFactory', '$location', '$routeParams', '$window', function($scope, employeeFactory, employeesFactory, departmentsFactory, locationFactory, $location, $routeParams, $window) { 
 
     // get by id method to bring employee with id preselect as parameter from web service
     $scope.employee = employeeFactory.show({id: $routeParams.id});
@@ -111,13 +103,7 @@ angular.module('employeeCtrl', [])
     };
 
     //Select options for departments
-    $scope.departments = [
-      {name: 'hr'}, 
-      {name: 'it'}, 
-      {name: 'sales'}, 
-      {name: 'marketing'}, 
-      {name: 'development'}
-    ];
+    $scope.departments = departmentsFactory.query();
 
     $scope.getSelectedDepartment = function() {
       $scope.employee.department.id = departmentsFactory.query().$promise.then(function(response) {

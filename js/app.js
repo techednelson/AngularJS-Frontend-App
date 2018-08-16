@@ -5,7 +5,7 @@ angular.module('myApp', [
   'employeeService',
   'departmentCtrl', 
   'departmentService',
-  'addressService'
+  'commonService'
 ])
 
 // configure routes

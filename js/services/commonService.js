@@ -9,4 +9,3 @@ services.factory('locationFactory', function () {
       USA : ['new york', 'los angeles', 'san francisco']
   };
 });
-

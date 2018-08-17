@@ -58,13 +58,14 @@
                     name="inputBirthDate" 
                     placeholder="Birth Date" 
                     ng-model="employee.birthDate"
+                    ng-pattern="/^(\d{1,2})-(\d{1,2})-(\d{4})$/"
                     ng-required="true">
         </div>
         <div class="col-md-4">
             <p class="validationError"  
                 ng-show="employeeForm.inputBirthDate.$invalid && !employeeForm.inputBirthDate.$pristine">
-                You must enter a a birth date.
-             </p>
+                You must enter a date with DD-MM-YYYY format
+            </p>
         </div>
     </div>
      
@@ -145,13 +146,14 @@
                     name="inputJoinDate" 
                     placeholder="Join Date" 
                     ng-model="employee.joinDate"
+                    ng-pattern="/^(\d{1,2})-(\d{1,2})-(\d{4})$/"
                     ng-required="true">
         </div>
         <div class="col-md-4">
              <p class="validationError"  
                 ng-show="employeeForm.inputJoinDate.$invalid && !employeeForm.inputJoinDate.$pristine">
-                You must enter a a join date.
-        </p>
+                You must enter a date with DD-MM-YYYY format
+            </p>
         </div>
     </div>
 
@@ -275,6 +277,7 @@
             <select class="form-control" 
                 ng-model="departmentSrc" 
                 ng-options="department.name for department in departments"
+                ng-required="true"
                 ng-change="getSelectedDepartment()">
                 <option value="">Select a Department</option>
             </select>

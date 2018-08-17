@@ -89,6 +89,11 @@ angular.module('employeeCtrl', [])
      $scope.employee.address.country = $scope.countrySrc;
      $scope.cities = cityService.getCities($scope.countrySrc);
    };
+
+   $scope.getSelectedCity = function() { 
+    $scope.employee.address.city = $scope.city;
+    };
+   
     //Select options for departments
     $scope.departments = departmentsFactory.query();
 

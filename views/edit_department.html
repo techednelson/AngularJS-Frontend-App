@@ -26,7 +26,7 @@
         <div class="col-md-4">
              <p class="validationError"  
                 ng-show="departmentForm.inputDepartmentName.$invalid && !departmentForm.inputDepartmentName.$pristine">
-                You must enter a department name between 3 and 15 characters.
+                You must enter a department name between 2 and 15 characters.
              </p>
         </div>
     </div>
@@ -148,7 +148,7 @@
         </div>
     </div>   
     
-    <button type="submit" class="btn btn-default submit">update</button>
+    <button ng-disabled="departmentForm.$invalid || departmentForm.$pristine" type="submit" class="btn btn-default submit">update</button>
 
     <a class="btn btn-default" ng-click="deleteDepartment(department.id)"  role="button"><i class="far fa-trash-alt"></i></a>
 

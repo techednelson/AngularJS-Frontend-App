@@ -13,13 +13,13 @@
                     placeholder="Department Name"
                     ng-model="department.name"
                     ng-required="true"
-                    ng-minlength="3"
+                    ng-minlength="2"
                     ng-maxlength="15">
         </div>
         <div class="col-md-4">
              <p class="validationError"  
                 ng-show="departmentForm.inputDepartmentName.$invalid && !departmentForm.inputDepartmentName.$pristine">
-                You must enter a department name between 3 and 15 characters.
+                You must enter a department name between 2 and 15 characters.
              </p>
         </div>
     </div>
@@ -135,7 +135,7 @@
         </div>
     </div>   
     
-    <button type="submit" class="btn btn-default submit">Create</button>
+    <button ng-disabled="departmentForm.$invalid" type="submit" class="btn btn-default submit">create</button>
 
     <a class="btn btn-default" href="#show_departments" role="button"><i class="fas fa-undo"></i></a>
 

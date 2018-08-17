@@ -32,7 +32,7 @@
         <div class="col-md-6">
             <select class="form-control" 
                 ng-model="countrySrc"
-                ng-options="country for (country,city) in countries"
+                ng-options="country for country in countries"
                 ng-change="getSelectedCountry()">
                 <option value="">Select a Country</option>
             </select>
@@ -54,7 +54,7 @@
             <select class="form-control" 
                 ng-disabled="!countrySrc"
                 ng-model="city" 
-                ng-options="city for city in countrySrc"
+                ng-options="city for city in cities"
                 ng-change="getSelectedCity()">
                 <option value="">Select a City</option>
             </select>

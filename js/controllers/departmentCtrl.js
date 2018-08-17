@@ -12,7 +12,7 @@ angular.module('departmentCtrl', [])
 
   }])
 
-  .controller('createDepartment', ['$scope','departmentsFactory', 'locationFactory', '$location', '$window', function($scope, departmentsFactory, locationFactory, $location, $window) {
+  .controller('createDepartment', ['$scope','departmentsFactory', 'countryService', 'cityService', '$location', '$window', function($scope, departmentsFactory, countryService, cityService, $location, $window) {
 
     $scope.department = { 
       name : '',
@@ -26,14 +26,11 @@ angular.module('departmentCtrl', [])
     };
 
     //Select options for country and city
-    $scope.countries = locationFactory;
+    $scope.countries = countryService.getCountries();
 
     $scope.getSelectedCountry = function() {
-      for(var propName in $scope.countries) {
-        if($scope.countries[propName] === $scope.countrySrc) {
-          $scope.department.address.country = propName;
-        }
-      }
+      $scope.department.address.country = $scope.countrySrc;
+      $scope.cities = cityService.getCities($scope.countrySrc);
     };
 
     $scope.getSelectedCity = function() { 
@@ -54,7 +51,7 @@ angular.module('departmentCtrl', [])
     
   }])
 
-  .controller('updateDepartment', ['$scope', 'departmentFactory', 'departmentsFactory', 'locationFactory', '$location', '$routeParams', '$window', function($scope, departmentFactory, departmentsFactory, locationFactory, $location, $routeParams, $window) {
+  .controller('updateDepartment', ['$scope', 'departmentFactory', 'departmentsFactory', 'countryService', 'cityService', '$location', '$routeParams', '$window', function($scope, departmentFactory, departmentsFactory, countryService, cityService, $location, $routeParams, $window) {
 
     // get by id method to bring department with id preselect as parameter from web service
     $scope.department = departmentFactory.show({id: $routeParams.id});
@@ -66,15 +63,13 @@ angular.module('departmentCtrl', [])
     });
 
     //Select options for country and city
-    $scope.countries = locationFactory;
+    $scope.countries = countryService.getCountries();
 
     $scope.getSelectedCountry = function() {
-      for(var propName in $scope.countries) {
-        if($scope.countries[propName] === $scope.countrySrc) {
-          $scope.department.address.country = propName;
-        }
-      }
+      $scope.department.address.country = $scope.countrySrc;
+      $scope.cities = cityService.getCities($scope.countrySrc);
     };
+
     $scope.getSelectedCity = function() { 
       $scope.department.address.city = $scope.city;
     };

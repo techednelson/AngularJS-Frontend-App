@@ -170,7 +170,7 @@
         <div class="col-md-6">
             <select class="form-control" 
             ng-model="countrySrc"
-            ng-options="country for (country,city) in countries"
+            ng-options="country for country in countries"
             ng-change="getSelectedCountry()">
                 <option 
                     value=""
@@ -195,7 +195,7 @@
             <select class="form-control" 
                 ng-disabled="!countrySrc"
                 ng-model="city" 
-                ng-options="city for city in countrySrc"
+                ng-options="city for city in cities"
                 ng-change="getSelectedCity()">
                 <option 
                     value=""
@@ -298,10 +298,10 @@
             <p class="validationError"  
                 ng-show="employeeForm.inputDepartment.$invalid && !employeeForm.inputDepartment.$pristine">
                 You must enter a the department.
-             </p>
+            </p>
        </div>
     </div>   
-
+   
     <button type="submit" class="btn btn-default submit">update</button>
   
     <a class="btn btn-default" ng-click="deleteEmployee(employee.id)"  role="button"><i class="far fa-trash-alt"></i></a>

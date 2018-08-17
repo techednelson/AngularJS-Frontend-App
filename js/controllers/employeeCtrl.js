@@ -1,5 +1,6 @@
 angular.module('employeeCtrl', [])
 
+  //employees controller that applies over show_employees.html
   .controller('employees', ['$scope','employeesFactory', '$location', function($scope, employeesFactory, $location) {
 
     //Get method to render Employees List in show_employees
@@ -12,7 +13,8 @@ angular.module('employeeCtrl', [])
 
   }])
 
-  .controller('createEmployee', ['$scope', 'employeesFactory', 'locationFactory', 'departmentsFactory', '$location', '$window', function($scope, employeesFactory, locationFactory, departmentsFactory, $location, $window,) {
+  //createEmployee controller that applies over create_employee.html
+  .controller('createEmployee', ['$scope', 'employeesFactory', 'countryService', 'cityService', 'departmentsFactory', '$location', '$window', function($scope, employeesFactory, countryService, cityService, departmentsFactory, $location, $window,) {
 
     $scope.employee = { 
       firstName : '',
@@ -35,14 +37,11 @@ angular.module('employeeCtrl', [])
     };
 
     //Select options for country and city
-    $scope.countries = locationFactory;
+    $scope.countries = countryService.getCountries();
 
     $scope.getSelectedCountry = function() {
-      for(var propName in $scope.countries) {
-        if($scope.countries[propName] === $scope.countrySrc) {
-          $scope.employee.address.country = propName;
-        }
-      }
+      $scope.employee.address.country = $scope.countrySrc;
+      $scope.cities = cityService.getCities($scope.countrySrc);
     };
 
     $scope.getSelectedCity = function() { 
@@ -53,13 +52,7 @@ angular.module('employeeCtrl', [])
     $scope.departments = departmentsFactory.query();
 
     $scope.getSelectedDepartment = function() {
-      departmentsFactory.query().$promise.then(function(response) {
-        for(var item of response) {
-          if(item.name === $scope.departmentSrc.name) {
-            $scope.employee.department.id = item.id;
-          }
-        }
-      });
+      $scope.employee.department.id = $scope.departmentSrc.id;
     };
     
     // callback for ng-submit 'registerEmployee'
@@ -76,7 +69,8 @@ angular.module('employeeCtrl', [])
 
   }])
 
-  .controller('updateEmployee', ['$scope', 'employeeFactory', 'employeesFactory', 'departmentsFactory',  'locationFactory', '$location', '$routeParams', '$window', function($scope, employeeFactory, employeesFactory, departmentsFactory, locationFactory, $location, $routeParams, $window) { 
+  //updateEmployee controller that applies over edit_employee.html
+  .controller('updateEmployee', ['$scope', 'employeeFactory', 'employeesFactory', 'departmentsFactory',  'countryService', 'cityService', '$location', '$routeParams', '$window', function($scope, employeeFactory, employeesFactory, departmentsFactory, countryService, cityService, $location, $routeParams, $window) { 
 
     // get by id method to bring employee with id preselect as parameter from web service
     $scope.employee = employeeFactory.show({id: $routeParams.id});
@@ -88,31 +82,18 @@ angular.module('employeeCtrl', [])
       $scope.departmentPre = $scope.employee.department.name;
     });
 
-    //Select options for country and city
-    $scope.countries = locationFactory;
+   //Select options for country and city
+   $scope.countries = countryService.getCountries();
 
-    $scope.getSelectedCountry = function() {
-      for(var propName in $scope.countries) {
-        if($scope.countries[propName] === $scope.countrySrc) {
-          $scope.employee.address.country = propName;
-        }
-      }
-    };
-    $scope.getSelectedCity = function() { 
-      $scope.employee.address.city = $scope.city;
-    };
-
+   $scope.getSelectedCountry = function() {
+     $scope.employee.address.country = $scope.countrySrc;
+     $scope.cities = cityService.getCities($scope.countrySrc);
+   };
     //Select options for departments
     $scope.departments = departmentsFactory.query();
 
     $scope.getSelectedDepartment = function() {
-      $scope.employee.department.id = departmentsFactory.query().$promise.then(function(response) {
-        for(var item of response) {
-          if(item.name === $scope.departmentSrc.name) {
-            $scope.employee.department.id = item.id;
-          }
-        }
-      });
+      $scope.employee.department.id = $scope.departmentSrc.id;
     };
     
     // callback for ng-submit 'updateEmployee':

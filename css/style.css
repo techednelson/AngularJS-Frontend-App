@@ -12,7 +12,7 @@ i {
 }
 
 .jumbotron {
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
   background-color: #FFFFFF;
 }
 
@@ -26,7 +26,7 @@ i {
 
 h3, h2 {
   color: #EC971F;
-  margin: 1.5rem 0; 
+  margin: 0.5rem 0; 
 }
 
 h4 {
@@ -34,7 +34,7 @@ h4 {
 }
 
 .map {
-  margin: 3rem 0;
+  margin: 1rem 0;
 }
 
 .img-responsive {

@@ -1,12 +1,31 @@
-angular.module('employeeCtrl', [])
+angular.module('employeeCtrl', ['ui.bootstrap'])
 
   //employees controller that applies over show_employees.html
   .controller('employees', ['$scope','employeesFactory', '$location', function($scope, employeesFactory, $location) {
 
-    //Get method to render Employees List in show_employees
-    $scope.employees = employeesFactory.query();
-    $scope.employeeOrder = 'firstName'; //show employee list order by firstName as default
+    //show employee list order by firstName as default
+    $scope.employeeOrder = 'firstName'; 
 
+    // Pagination
+    $scope.currentPage = 1;
+    $scope.numPerPage = 5;
+    $scope.maxSize = 5;
+    
+    $scope.$watch("currentPage + numPerPage", function() {
+
+      var begin = (($scope.currentPage - 1) * $scope.numPerPage);
+      var end = begin + $scope.numPerPage;
+
+       //Get method to render Employees List in show_employees
+      employeesFactory.query().$promise.then(function(response) {
+        $scope.employees = response;
+        $scope.employeesFiltered =  $scope.employees.slice(begin, end);
+      }).catch(function(error) {
+        console.log(error);
+      });
+    });
+
+    // Redirection to edit_employee.html
     $scope.editEmployee = function(employeeId) {
       $location.path('/edit_employee/' + employeeId);
     };

@@ -28,7 +28,7 @@
         </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="item in employees | filter: query | orderBy: employeeOrder: direction">
+      <tr ng-repeat="item in employeesFiltered | filter: query | orderBy: employeeOrder: direction">
 
         <td>{{ item.id }}</td>
         <td>{{ item.firstName | uppercase }}</td>
@@ -39,3 +39,11 @@
       </tr> 
     </tbody>
 </table>
+<pagination 
+  class="pag"
+  ng-model="currentPage" 
+  total-items="employees.length" 
+  items-per-page="5"
+  max-size="maxSize"
+  boundary-links="true">
+</pagination>

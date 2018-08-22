@@ -61,7 +61,7 @@
          </div>
          <div class="col-md-6">
             <input class="form-control" 
-                    type="text" 
+                    type="date" 
                     name="inputBirthDate" 
                     placeholder="Birth Date" 
                     ng-model="employee.birthDate"
@@ -70,7 +70,7 @@
         <div class="col-md-4">
             <p class="validationError"  
                 ng-show="employeeForm.inputBirthDate.$invalid && !employeeForm.inputBirthDate.$pristine">
-                You must enter a a birth date.
+                You must enter a date with DD/MM/YYYY format
              </p>
         </div>
     </div>
@@ -148,7 +148,7 @@
         </div>
         <div class="col-md-6">
              <input class="form-control" 
-                    type="text" 
+                    type="date" 
                     name="inputJoinDate" 
                     placeholder="Join Date" 
                     ng-model="employee.joinDate"
@@ -157,7 +157,7 @@
         <div class="col-md-4">
              <p class="validationError"  
                 ng-show="employeeForm.inputJoinDate.$invalid && !employeeForm.inputJoinDate.$pristine">
-                You must enter a a join date.
+                You must enter a date with DD/MM/YYYY format
         </p>
         </div>
     </div>

@@ -24,10 +24,12 @@
 
 <table class="table table-striped">
     <thead>
+      <tr>
         <th>Department id</th><th>Name</th><th>Country</th><th>More</th>
+      </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="item in departments | filter: query | orderBy: departmentOrder: direction">
+      <tr ng-repeat="item in departmentsFiltered | filter: query | orderBy: departmentOrder: direction">
 
         <td>{{ item.id }}</td>
         <td>{{ item.name | uppercase }}</td>
@@ -35,5 +37,14 @@
          <td>
             <a class="btn btn-default" ng-click="editDepartment(item.id)" role="button"><i class="fas fa-info-circle"></i></a>
         </td>
+      </tr>
     </tbody>
 </table>
+<pagination 
+  class="pag"
+  ng-model="currentPage" 
+  total-items="departments.length" 
+  items-per-page="5"
+  max-size="maxSize"
+  boundary-links="true">
+</pagination>

@@ -11,33 +11,45 @@ i {
   bottom: 8px;
 }
 
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.pagination li > a { 
+  color: #EC971F; 
+}
+
+.pagination li > a:hover { 
+  color: #EC971F; 
+}
+
+.pagination .active a {
+  color: #FFFFFF;
+  background-color: #EC971F;
+  border: #EC971F;
+}
+
+.pagination .active a:hover {background-color: #EC971F;}
+
+.pagination .active a:visited { background-color: #EC971F;}
+
 .jumbotron {
   margin-top: 0.5rem;
   background-color: #FFFFFF;
 }
 
-.jumbotron h1, span {
-  color: #EC971F;
-}
+.jumbotron h1, span { color: #EC971F; }
 
-.row a {
-  text-decoration: none;
-}
+.row a { text-decoration: none; }
 
 h3, h2 {
   color: #EC971F;
   margin: 0.5rem 0; 
 }
 
-h4 {
-  color: #F2F2F2;
-}
+h4 { color: #F2F2F2; }
 
-.map {
-  margin: 1rem 0;
-}
+.map { margin: 1rem 0; }
 
-.img-responsive {
+.img-responsive { 
   margin: 0 auto;
   border-radius: 0.5rem;
 }
@@ -48,9 +60,7 @@ table {
   font-size: 1.5rem;
 }
 
-table thead, tbody, tr, td, th{
-  text-align: center;
-}
+table thead, tbody, tr, td, th { text-align: center; }
 
 .list-title {
   color: #F2F2F2;
@@ -76,9 +86,7 @@ footer {
   height: 2.5%;
 }
 
-input.ng-invalid.ng-pristine {
-  border: 1px solid yellow;
-}
+input.ng-invalid.ng-pristine { border: 1px solid yellow; }
 
 .ng-invalid .btn {
   background: #F2F2F2;
@@ -90,6 +98,41 @@ input.ng-invalid.ng-pristine {
   color: #F2F2F2;
 }
 
-.validationError {
-  color: red;
+.validationError { color: red;}
+
+@media screen and (max-width: 400px) {
+  .pag  {
+    position: relative;
+    left: 10%;
+  }
 }
+
+@media screen and (min-width: 401px) { 
+  .pag  { 
+    position: relative;
+    left: 20%; 
+  }
+}
+
+@media screen and (min-width: 521px) { 
+  .pag  { 
+    position: relative;
+    left: 28%; 
+  }
+}
+
+@media screen and (min-width: 768px) { 
+  .pag  { 
+    position: relative;
+    left: 30%; 
+  }
+}
+
+@media screen and (min-width: 992px) { 
+  .pag  {
+    position: relative;
+    left: 35%; 
+  }
+}
+
+

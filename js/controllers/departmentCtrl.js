@@ -1,10 +1,27 @@
-angular.module('departmentCtrl', [])
+angular.module('departmentCtrl', ['ui.bootstrap'])
 
   .controller('departments', ['$scope','departmentsFactory','$location', function($scope, departmentsFactory, $location) {
 
-    //Get method to render Departments List in show_employees
-    $scope.departments = departmentsFactory.query();
     $scope.departmentOrder = 'name'; //show employee list order by firstName as default
+
+    // Pagination
+    $scope.currentPage = 1;
+    $scope.numPerPage = 5;
+    $scope.maxSize = 5;
+    
+    $scope.$watch("currentPage + numPerPage", function() {
+
+      var begin = (($scope.currentPage - 1) * $scope.numPerPage);
+      var end = begin + $scope.numPerPage;
+
+      //Get method to render Departments List in show_employees
+      departmentsFactory.query().$promise.then(function(response) {
+        $scope.departments = response;
+        $scope.departmentsFiltered =  $scope.departments.slice(begin, end);
+      }).catch(function(error) {
+        console.log(error);
+      });
+    });
 
     $scope.editDepartment = function(departmentId) {
       $location.path('/edit_department/' + departmentId);

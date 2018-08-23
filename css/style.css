@@ -98,6 +98,11 @@ input.ng-invalid.ng-pristine { border: 1px solid yellow; }
   color: #F2F2F2;
 }
 
+.submit-update {
+  background: #EC971F;
+  color: #F2F2F2;
+}
+
 .validationError { color: red;}
 
 @media screen and (max-width: 400px) {

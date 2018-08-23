@@ -140,7 +140,7 @@ angular.module('employeeCtrl', ['ui.bootstrap'])
     // callback for ng-click 'deleteEmployee':
     $scope.deleteEmployee = function (employeeId) {
       employeeFactory.delete({ id: employeeId }).$promise.then(function() {
-        $window.alert('Employee was successfully registered');
+        $window.alert('Employee was successfully deleted');
         $window.location.reload();
         $location.path('/show_employees/');
       }).catch(function(error) {

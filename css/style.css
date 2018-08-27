@@ -13,12 +13,12 @@ i {
 
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
-.pagination li > a { 
-  color: #EC971F; 
+.pagination li > a {
+  color: #EC971F;
 }
 
-.pagination li > a:hover { 
-  color: #EC971F; 
+.pagination li > a:hover {
+  color: #EC971F;
 }
 
 .pagination .active a {
@@ -42,14 +42,14 @@ i {
 
 h3, h2 {
   color: #EC971F;
-  margin: 0.5rem 0; 
+  margin: 0.5rem 0;
 }
 
 h4 { color: #F2F2F2; }
 
 .map { margin: 1rem 0; }
 
-.img-responsive { 
+.img-responsive {
   margin: 0 auto;
   border-radius: 0.5rem;
 }
@@ -88,17 +88,7 @@ footer {
 
 input.ng-invalid.ng-pristine { border: 1px solid yellow; }
 
-.ng-invalid .btn {
-  background: #F2F2F2;
-  color: #EC971F;
-}
-
-.ng-valid .submit {
-  background: #EC971F;
-  color: #F2F2F2;
-}
-
-.ng-valid .submit-update {
+.submit-update {
   background: #EC971F;
   color: #F2F2F2;
 }
@@ -112,31 +102,31 @@ input.ng-invalid.ng-pristine { border: 1px solid yellow; }
   }
 }
 
-@media screen and (min-width: 401px) { 
-  .pag  { 
-    position: relative;
-    left: 20%; 
-  }
-}
-
-@media screen and (min-width: 521px) { 
-  .pag  { 
-    position: relative;
-    left: 28%; 
-  }
-}
-
-@media screen and (min-width: 768px) { 
-  .pag  { 
-    position: relative;
-    left: 30%; 
-  }
-}
-
-@media screen and (min-width: 992px) { 
+@media screen and (min-width: 401px) {
   .pag  {
     position: relative;
-    left: 35%; 
+    left: 20%;
+  }
+}
+
+@media screen and (min-width: 521px) {
+  .pag  {
+    position: relative;
+    left: 28%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .pag  {
+    position: relative;
+    left: 30%;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .pag  {
+    position: relative;
+    left: 35%;
   }
 }
 
